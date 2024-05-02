@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, render_template, jsonify
 import psycopg2
 
 app = Flask(__name__)
@@ -7,14 +7,33 @@ app = Flask(__name__)
 conn = psycopg2.connect(
     dbname="realty",
     user="michaela",
+    password="final07@07",
     host="localhost",
     port="5432"
 )
 
 # Define API endpoints
 
+@app.route('/')
+def index():
+    return render_template('index.html')
+    '''
+    try:
+        # Execute a query to fetch data from the database
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM properties LIMIT 1")
+        data = cur.fetchone()
+        cur.close()
+        
+        # If data is fetched successfully, the connection is working
+        return 'Database connection is working!'
+    except Exception as e:
+        # If there's an error, print it to the console for debugging
+        print('Error:', e)
+        return 'Database connection error'
+'''
 @app.route('/renting')
-def get_renting_properties():
+def renting():
     try:
         cur = conn.cursor()
         cur.execute("""
@@ -25,12 +44,41 @@ def get_renting_properties():
         """)
         properties = cur.fetchall()
         cur.close()
-        return jsonify(properties)
+        return render_template('renting.html', properties=properties)
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-# Similar endpoints for buying and selling properties
+@app.route('/buying')
+def buying():
+    try:
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT p.*, b.list_price, b.status
+            FROM properties p
+            JOIN buying b ON p.id = b.property_id
+            WHERE p.category = 'buying'
+        """)
+        properties = cur.fetchall()
+        cur.close()
+        return render_template('buying.html', properties=properties)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/selling')
+def selling():
+    try:
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT p.*, s.list_price, s.status
+            FROM properties p
+            JOIN selling s ON p.id = s.property_id
+            WHERE p.category = 'selling'
+        """)
+        properties = cur.fetchall()
+        cur.close()
+        return render_template('selling.html', properties=properties)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
-

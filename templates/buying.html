@@ -3,29 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rent Listings</title>
-    <link rel="stylesheet" href="components/styles.css">
+    <title>Buy Listings</title>
+    <link rel="stylesheet" href="/static/components/styles.css">
+
 </head>
 <body>
     <header>
         <div class="container">
-            <h1>Real Estate Company - Rent Listings</h1>
+            <h1>Real Estate Company - Buy Listings</h1>
         </div>
     </header>
     <nav>
         <div class="container">
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="buying.html">Buying</a></li>
-                <li><a href="#">Selling</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/renting">Renting</a></li>
+                <li><a href="/selling">Selling</a></li>
             </ul>
         </div>
     </nav>
     <main>
         <section class="listings">
             <div class="container">
-                <h2>Available Properties for Rent</h2>
-                <!-- Renting listings will be displayed here -->
+                <h2>Properties for Sale</h2>
+                <!-- Buying listings will be displayed here -->
+                <ul>
+                    {% for property in properties %}
+                    <li>{{ property }}</li>
+                    {% endfor %}
+                </ul>
             </div>
         </section>
     </main>
