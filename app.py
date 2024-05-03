@@ -64,21 +64,6 @@ def buying():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/selling')
-def selling():
-    try:
-        cur = conn.cursor()
-        cur.execute("""
-            SELECT p.*, s.list_price, s.status
-            FROM properties p
-            JOIN selling s ON p.id = s.property_id
-            WHERE p.category = 'selling'
-        """)
-        properties = cur.fetchall()
-        cur.close()
-        return render_template('selling.html', properties=properties)
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -4,40 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buy Listings</title>
-    <link rel="stylesheet" href="/static/components/styles.css">
-
+    <link rel="stylesheet" href="/static/components/styles_buying.css">
 </head>
 <body>
     <header>
         <div class="container">
-            <h1>Real Estate Company - Buy Listings</h1>
+            <img src="/static/components/images/knight logo.png">
+            <h1>Knight Realty - Buy Listings</h1>
         </div>
     </header>
     <nav>
-        <div class="container">
+        <div class="headercontainer">
             <ul>
                 <li><a href="/">Home</a></li>
                 <li><a href="/renting">Renting</a></li>
-                <li><a href="/selling">Selling</a></li>
             </ul>
         </div>
     </nav>
     <main>
         <section class="listings">
-            <div class="container">
+            <div class="listingcontainer">
                 <h2>Properties for Sale</h2>
                 <!-- Buying listings will be displayed here -->
-                <ul>
-                    {% for property in properties %}
-                    <li>{{ property }}</li>
-                    {% endfor %}
-                </ul>
+                {% for property in properties %}
+                <div class="card">
+                    <img src="/static/components/images/house.jpeg" alt="Property Image">
+                    <div class="card-details">
+                        <h3>Type: {{ property[1] }}</h3>
+                        <p>Description: {{ property[4] }}</p>
+                        <p>Price: ${{ property[3] }}</p>
+                        <p>Status: {{ property[7] }}</p>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
         </section>
     </main>
     <footer>
         <div class="container">
-            <p>&copy; 2024 Real Estate Company. All rights reserved.</p>
+            <p>&copy; 2024 Knight Realty. All rights reserved.</p>
         </div>
     </footer>
 </body>
