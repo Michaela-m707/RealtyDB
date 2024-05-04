@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sale Listings</title>
-    <link rel="stylesheet" href="/static/components/styles.css">
+    <title>Agents</title>
+    <link rel="stylesheet" href="/static/components/styles_agents.css">
+   
 </head>
 <body>
     <header>
         <div class="container">
             <img src="/static/components/images/knight logo.png" alt="Knight Realty Logo">
-            <h1>Knight Realty - Selling Listings</h1>
+            <h1>Knight Realty - Agents</h1>
         </div>
     </header>
     <nav>
@@ -25,13 +26,18 @@
     <main>
         <section class="listings">
             <div class="container">
-                <h2>Available Properties for Rent</h2>
-                <!-- Renting listings will be displayed here -->
-                <ul>
-                    {% for property in properties %}
-                    <li>{{ property }}</li>
-                    {% endfor %}
-                </ul>
+                <h2>Our Agents</h2>
+                <!-- Agents' cards will be displayed here -->
+                {% for agent in agents %}
+                <div class="card">
+                    <img src="/static/components/images/agent.png" alt="Property Image">
+                    <div class="card-details">
+                        <h3>{{ agent[0] }}</h3>
+                        <p>Phone: {{ agent[1] }}</p>
+                        <p>Email: {{ agent[2] }}</p>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
         </section>
     </main>

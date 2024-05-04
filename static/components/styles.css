@@ -63,6 +63,14 @@ footer {
 .container img {
     width: 65px; 
     margin-right: 5px; 
+    margin-bottom: 20px;
 }
 
+.container h2 {
+    margin: 10px;
+}
+#carouselExampleIndicators {
+    max-width: 800px; /* Set a maximum width */
+    margin: auto; /* Center the carousel */
 
+}
